@@ -25,6 +25,11 @@ const routes = [
         name: "用户管理",
         component: () => import("../views/User.vue"),
       },
+      {
+        path: "carousel",
+        name: "轮播图管理",
+        component: () => import("../views/CarouselView.vue"),
+      }
     ],
   },
 
@@ -50,12 +55,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-
-// // 路由守卫
-// router.beforeEach((to, from, next) => {
-//   localStorage.setItem("currentPathName", to.name)  // 设置当前的路由名称，为了在Header组件中去使用
-//   store.commit("setPath")  // 触发store的数据更新
-//   next()  // 放行路由
-// })
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  localStorage.setItem("currentPathName", to.name)  // 设置当前的路由名称，为了在Header组件中去使用
+  store.commit("setPath")  // 触发store的数据更新
+  next()  // 放行路由
+})
 
 export default router
